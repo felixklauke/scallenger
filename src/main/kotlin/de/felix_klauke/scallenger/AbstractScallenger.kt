@@ -36,7 +36,7 @@ import java.nio.file.StandardOpenOption
  *
  * @author Felix Klauke <fklauke@itemis.de>
  */
-abstract class AbstractScallenger(private val dataChunkSize: Long, file: Path) : Scallenger {
+abstract class AbstractScallenger(private val dataChunkSize: Long, private val file: Path) : Scallenger {
 
     /**
      * If scallenger is initialized.
@@ -56,7 +56,7 @@ abstract class AbstractScallenger(private val dataChunkSize: Long, file: Path) :
     /**
      * The channel to the file.
      */
-    val channel: FileChannel = FileChannel.open(file, StandardOpenOption.READ, StandardOpenOption.WRITE)
+    private val channel: FileChannel = FileChannel.open(file, StandardOpenOption.READ, StandardOpenOption.WRITE, StandardOpenOption.CREATE)
 
     /**
      * The unsafe accessor to memory.
@@ -114,7 +114,7 @@ abstract class AbstractScallenger(private val dataChunkSize: Long, file: Path) :
 
         while (read) {
             lock()
-            
+
             contentLength = getInt(ScallengerConstants.DATA_LENGTH_OFSSET.toLong())
             read = contentLength == ScallengerConstants.EMPTY
 
