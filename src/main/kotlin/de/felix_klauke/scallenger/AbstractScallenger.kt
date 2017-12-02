@@ -67,7 +67,7 @@ abstract class AbstractScallenger(private val dataChunkSize: Long, file: Path) :
         while (write) {
             lock()
 
-            write = !(getInt(ScallengerConstants.DATA_LENGTH_OFSSET.toLong()) == ScallengerConstants.EMPTY)
+            write = getInt(ScallengerConstants.DATA_LENGTH_OFSSET.toLong()) != ScallengerConstants.EMPTY
 
             unlock()
             Thread.yield()
@@ -83,7 +83,7 @@ abstract class AbstractScallenger(private val dataChunkSize: Long, file: Path) :
     }
 
     override fun readMessage(): ScallengerSubject {
-        var contentLength = 0;
+        var contentLength = 0
 
         var read = true
 
@@ -91,7 +91,7 @@ abstract class AbstractScallenger(private val dataChunkSize: Long, file: Path) :
             lock()
             contentLength = getInt(ScallengerConstants.DATA_LENGTH_OFSSET.toLong())
 
-            read = contentLength == ScallengerConstants.EMPTY;
+            read = contentLength == ScallengerConstants.EMPTY
 
             unlock()
             Thread.yield()
