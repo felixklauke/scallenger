@@ -1,0 +1,3 @@
+rootProject.name = 'scallenger'
+rootProject.buildFileName = 'build.gradle.kts'
+
