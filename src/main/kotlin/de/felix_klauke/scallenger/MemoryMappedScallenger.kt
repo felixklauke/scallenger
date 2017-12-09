@@ -25,21 +25,33 @@
 package de.felix_klauke.scallenger
 
 import java.nio.file.Path
-import java.nio.file.Paths
 
 /**
  * @author Felix Klauke <fklauke@itemis.de>
  */
-object ScallengerFactory {
+class MemoryMappedScallenger(dataChunkSize: Long, file: Path) : AbstractScallenger(dataChunkSize, file) {
 
-    /**
-     * Create a new scallenger instance by its underlying parameters.
-     */
-    fun createUnsafeScallenger(dataChunkSize: Long = 4096, path: Path = Paths.get("com.scllngr")): Scallenger {
-        return UnsafeScallenger(dataChunkSize, path)
+    override fun getByte(position: Long): Byte {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    fun createMemoryMappedScallenger(dataChunkSize: Long = 5096, path: Path = Paths.get("com.scllngr")): Scallenger {
-        return MemoryMappedScallenger(dataChunkSize, path)
+    override fun putByte(position: Long, byte: Byte) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun getInt(position: Long): Int {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun putInt(position: Long, int: Int) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun lock() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun unlock() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }
