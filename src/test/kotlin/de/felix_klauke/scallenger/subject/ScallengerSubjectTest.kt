@@ -22,24 +22,32 @@
  * SOFTWARE.
  */
 
-package de.felix_klauke.scallenger
+package de.felix_klauke.scallenger.subject
+
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
+import org.junit.Before
+import org.junit.Test
 
 /**
  * @author Felix Klauke <fklauke></fklauke>@itemis.de>
  */
-object ScallengerConstants {
+class ScallengerSubjectTest {
 
-    const val INITIAL_POSITION: Long = 0
+    private lateinit var subject: ScallengerSubject
 
-    const val HEADER_OFFSET = 12
+    @Before
+    fun setup() {
+        subject = ScallengerSubject(ByteArray(0))
+    }
 
-    const val LOCK_OFFSET = 0
+    @Test
+    fun getData() {
+        assertNotNull(subject.data)
+    }
 
-    const val DATA_LENGTH_OFSSET = 4
-
-    const val STATE_OFFSET = 8
-
-    const val UNLOCK_MARK = 0
-
-    const val EMPTY = -1
+    @Test
+    fun copy() {
+        assertEquals(subject.data, subject.copy().data)
+    }
 }
