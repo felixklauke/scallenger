@@ -46,7 +46,7 @@ abstract class AbstractScallenger(private val dataChunkSize: Long, private val f
     /**
      * The buffer that is used to read and write memory.
      */
-    private lateinit var buffer: MappedByteBuffer
+    lateinit var buffer: MappedByteBuffer
 
     /**
      * The address of the mapped byte buffer in the memory.
@@ -56,7 +56,7 @@ abstract class AbstractScallenger(private val dataChunkSize: Long, private val f
     /**
      * The channel to the file.
      */
-    private val channel: FileChannel = FileChannel.open(file, StandardOpenOption.READ, StandardOpenOption.WRITE, StandardOpenOption.CREATE)
+    val channel: FileChannel = FileChannel.open(file, StandardOpenOption.READ, StandardOpenOption.WRITE, StandardOpenOption.CREATE)
 
     /**
      * The unsafe accessor to memory.
