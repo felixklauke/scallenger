@@ -24,6 +24,7 @@
 
 package de.felix_klauke.scallenger
 
+import java.nio.channels.FileLock
 import java.nio.file.Path
 
 /**
@@ -31,27 +32,29 @@ import java.nio.file.Path
  */
 class MemoryMappedScallenger(dataChunkSize: Long, file: Path) : AbstractScallenger(dataChunkSize, file) {
 
+    private lateinit var lock: FileLock
+
     override fun getByte(position: Long): Byte {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return buffer.get(position.toInt())
     }
 
     override fun putByte(position: Long, byte: Byte) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        buffer.put(position.toInt(), byte)
     }
 
     override fun getInt(position: Long): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return buffer.getInt(position.toInt())
     }
 
     override fun putInt(position: Long, int: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        buffer.putInt(position.toInt(), int)
     }
 
     override fun lock() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        lock = channel.lock()
     }
 
     override fun unlock() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        lock.release()
     }
 }
